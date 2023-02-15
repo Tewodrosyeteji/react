@@ -1,9 +1,17 @@
-/* .Person{
+.Person{
     width:50%;
     margin: 15px auto;
     padding: 5px;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #cecece;
     text-align: center;
+}
 
-} */
+
+@media (min-width: 500px){
+    .Person {
+        width:450px;
+}
+}
+
+

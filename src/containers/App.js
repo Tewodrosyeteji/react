@@ -1,9 +1,15 @@
 
 import { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
+import Persons from '../components/persons/persons';
+import Cockpit from '../components/cockpit/cockpit';
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    console.log('[App.js] constructor')
+  }
 
   state={
     persons:[
@@ -20,6 +26,11 @@ class App extends Component {
     ]
   }
  
+
+  static getDerivedStateFromProps(props,state){
+   console.log('[App.js] getDerivedStatefromProps');
+   return state;
+  }
 
   nameChangedHandler=(e,id)=>{
    const personIndx=this.state.persons.findIndex(per => per.id === id);
@@ -50,7 +61,7 @@ deleteNameHandler=(personIndes) =>{
 
   
   render(){
-
+  console.log('[App.js] render')
     const style={
       backgroundColor:'green',
       ':hover':{
@@ -64,14 +75,10 @@ deleteNameHandler=(personIndes) =>{
     if(this.state.showName){
       person=(
         <div>
-          {this.state.persons.map((per,index)=>{
-            return <Person 
-                key={per.id}
-                name={per.name} 
-                age={per.age}
-                clicked={()=> this.deleteNameHandler(index)}
-                changed={(e)=> this.nameChangedHandler(e,per.id)}/>
-          })}
+          <Persons 
+               persons={this.state.persons} 
+               clicked={this.deleteNameHandler} 
+               changed={this.nameChangedHandler} />
         </div>
       );
       style.backgroundColor='red';
@@ -79,19 +86,15 @@ deleteNameHandler=(personIndes) =>{
     }
 
   
-    const classes=[];
-    if(this.state.persons.length <= 2){
-      classes.push('red');
-    }
-    if(this.state.persons.length <=1){
-      classes.push('bold');
-    }
+    
     
     return (
     <div className="App">
-      <h1 > react</h1>
-      <p className={classes.join(' ')}> Today is the day start everything from ground</p>
-      <button onClick={this.toggleNameHandler} style={style} >Toggle Person</button>
+        <Cockpit 
+              persons={this.state.persons} 
+              toggled={this.toggleNameHandler} 
+              showPerson={this.state.showName}
+              title={this.props.appTitle}/>
         {person}
     </div>
    
