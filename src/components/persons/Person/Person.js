@@ -17,23 +17,7 @@ import classes from './Person.module.css'
 
 // `
 class Person extends Component{
-static getDerivedStateFromProps(props){
-    console.log('[Persons.js ] getDrivedStateFromProps')
-}
 
-
-shouldComponentUpdate(nextProps,nexState){
-console.log('[Prsons.js] shouldComponentUpdate');
-}
-
-getSnapshotBeforeUpdate(prevProps,prevState){
-console.log('[Persons.js] getSnapshotBeforeUpdate')
-return null;
-}
-
-componentDidUpdate(){
-    console.log('[Person.js] componentDidUpdate')
-}
     render(){
         console.log('Person.js rendering.....')
         return <div className={classes.Person}>
